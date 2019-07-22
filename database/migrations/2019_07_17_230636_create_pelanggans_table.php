@@ -19,6 +19,7 @@ class CreatePelanggansTable extends Migration
             $table->foreign('id_petugas')->references('id_petugas')->on('petugas')->onDelete('cascade');
             $table->string('nama');
             $table->text('alamat');
+            $table->text('barcode');
             $table->timestamps();
 
         });
