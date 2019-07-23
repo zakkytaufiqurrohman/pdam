@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('search','MeteranController@index');
-Route::post('/action','MeteranController@search')->name('search');
-Route::post('/save','MeteranController@save')->name('save');
+
 
 Auth::routes();
 

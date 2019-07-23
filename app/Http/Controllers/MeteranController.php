@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 class MeteranController extends Controller
 {
     //
-
     public function index(){
         return view('meteran');
     }
@@ -33,24 +32,26 @@ class MeteranController extends Controller
                 'data'=>$pelanggan,
                 'message'=>$message,
             ];
-            // return response()->json($response,200);
-            return view('add_meteran',compact('response'));
+             return response()->json($response,200);
+            // return view('add_meteran',compact('response'));
         }
     }
-    public function save(Request $request){
-       $this->validate($request,[
-           'id_pelanggan'=>'required',
-           'jumlah_meteran'=>'required',
-           'harga'=>'required',
-       ]);
-       $request['id_petugas']=1;//di buat berdasarkan login
-       $request['date']= date('Y-m-d');
-       meteran::create($request->all());
-       $response=[
-           'message'=>'data berhasil ditambahkan',
-           'status'=>'200',
-       ];
-       return response()->json($response,200);
+
+    public function created(Request $request){
+        $this->validate($request,[
+            'jumlah_meteran'=>'required',
+            'id_pelanggan'=>'required',
+            'harga'=>'required',
+            'id_petugas'=>'required',//di buat berdasarkan login app petugas
+
+        ]);
+        $request['date']= date('Y-m-d');
+        meteran::create($request->all());
+        $response=[
+            'message'=>'data berhasil ditambahkan',
+            'status'=>'200',
+        ];
+        return response()->json($response,200);
     }
 
 }

@@ -12,11 +12,11 @@
         $nama=$response['data']->nama;
         $id_pelanggan=$response['data']->id_pelanggan;
     @endphp
-    <form method="post" action={{ route('save') }}>
+    <form action={{ route('save')}} method="POST">
         @csrf
         <input type="text" name='id_pelanggan' value="{{$id_pelanggan}} " readonly ><br>
-        <input type="text" value="{{$nama}} " readonly><br>
-        <input type="text" value="{{$jumlah_meteran}}" readOnly><br>
+        <input type="text" name="nama" value="{{$nama}} " ><br>
+        <input type="text" name="jumlah_meteran_lama" value="{{$jumlah_meteran}}" readOnly><br>
         masukkan jumlah meteran sekarang
          <input type="text" name='jumlah_meteran' id="jumlah_meteran"><br>
          total bayar

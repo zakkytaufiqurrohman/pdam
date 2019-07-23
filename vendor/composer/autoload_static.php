@@ -376,6 +376,10 @@ class ComposerStaticInit4221ca2b6ef2c18698137c393c3b592b
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
+            'Milon\\Barcode' => 
+            array (
+                0 => __DIR__ . '/..' . '/milon/barcode/src',
+            ),
         ),
     );
 
@@ -388,8 +392,11 @@ class ComposerStaticInit4221ca2b6ef2c18698137c393c3b592b
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\MeteranController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeteranController.php',
         'App\\Http\\Controllers\\PelangganController' => __DIR__ . '/../..' . '/app/Http/Controllers/PelangganController.php',
         'App\\Http\\Controllers\\PetugasController' => __DIR__ . '/../..' . '/app/Http/Controllers/PetugasController.php',
+        'App\\Http\\Controllers\\coba' => __DIR__ . '/../..' . '/app/Http/Controllers/coba.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -1963,6 +1970,15 @@ class ComposerStaticInit4221ca2b6ef2c18698137c393c3b592b
         'League\\Flysystem\\Util\\ContentListingFormatter' => __DIR__ . '/..' . '/league/flysystem/src/Util/ContentListingFormatter.php',
         'League\\Flysystem\\Util\\MimeType' => __DIR__ . '/..' . '/league/flysystem/src/Util/MimeType.php',
         'League\\Flysystem\\Util\\StreamHasher' => __DIR__ . '/..' . '/league/flysystem/src/Util/StreamHasher.php',
+        'Milon\\Barcode\\BarcodeServiceProvider' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/BarcodeServiceProvider.php',
+        'Milon\\Barcode\\DNS1D' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/DNS1D.php',
+        'Milon\\Barcode\\DNS2D' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/DNS2D.php',
+        'Milon\\Barcode\\Datamatrix' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/Datamatrix.php',
+        'Milon\\Barcode\\Facades\\DNS1DFacade' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/Facades/DNS1DFacade.php',
+        'Milon\\Barcode\\Facades\\DNS2DFacade' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/Facades/DNS2DFacade.php',
+        'Milon\\Barcode\\PDF417' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/PDF417.php',
+        'Milon\\Barcode\\QRcode' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/QRcode.php',
+        'Milon\\Barcode\\WrongCheckDigitException' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/WrongCheckDigitException.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\Legacy\\TestListenerForV5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/Legacy/TestListenerForV5.php',
         'Mockery\\Adapter\\Phpunit\\Legacy\\TestListenerForV6' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/Legacy/TestListenerForV6.php',

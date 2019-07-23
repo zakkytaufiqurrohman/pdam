@@ -35,7 +35,7 @@
                         <div class="form-group">
                                 <label>petugas:</label>
 
-                                <select name="petugas" id="" class="form-control" @error('petugas') is-invalid @enderror" required>
+                                <select name="id_petugas" id="" class="form-control" @error('petugas') is-invalid @enderror" required>
                                     <option value=""> pilih nama petugas</option>
                                     @foreach ($petugas as $data)
                                         <option value="{{$data->id_petugas}}">{{$data->nama}}</option>

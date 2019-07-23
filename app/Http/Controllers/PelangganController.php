@@ -39,7 +39,18 @@ class PelangganController extends Controller
     public function store(Request $request)
     {
         //
-        return $request->all();
+        $this->validate($request,[
+            'nama'=>'required|string',
+            'id_petugas'=>'int|required',
+            'alamat'=>'required',
+        ]);
+
+        $request['barcode']='1';
+        $x=pelanggan::create($request->all());
+        $pelanggan=pelanggan::orderBy('id_pelanggan','DESC')->first();
+        $x->barcode="http://localhost:8000/seach/".$pelanggan->id_pelanggan;
+        $x->save();
+        return redirect()->route('pelanggan.index')->with('succes','data berhasil di tambahkan');
     }
 
     /**
@@ -51,6 +62,9 @@ class PelangganController extends Controller
     public function show($id)
     {
         //
+         $pelanggan=pelanggan::findOrFail($id);
+         return view('admin.pelanggan.show_pelanggan',compact('pelanggan'));
+
     }
 
     /**
@@ -62,6 +76,9 @@ class PelangganController extends Controller
     public function edit($id)
     {
         //
+        $petugas=petugas::all();
+        $data=pelanggan::findOrFail($id);
+        return view('admin.pelanggan.edit_pelanggan',compact('data','petugas'));
     }
 
     /**
@@ -74,6 +91,15 @@ class PelangganController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data=pelanggan::findOrFail($id);
+        $this->validate($request,[
+            'nama'=>'required',
+            'alamat'=>'required',
+            'id_petugas'=>'required',
+        ]);
+        // return $request->all();
+        $data->update($request->all());
+        return redirect()->route('pelanggan.index')->with('succes','data berhasil di update');
     }
 
     /**
@@ -84,7 +110,9 @@ class PelangganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data=pelanggan::findOrFail($id);
+        $data->delete();
+        return redirect()->route('pelanggan.index')->with('succes','data berhasil di delete');
     }
 
 }

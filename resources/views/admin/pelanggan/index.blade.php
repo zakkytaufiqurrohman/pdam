@@ -5,12 +5,17 @@
 @endsection
 @section('body')
 <section class="content-wrapper">
-
         <div class="col-xs-12">
             <div class="mt-xl-10">
                 <p></p>
             </div>
             <div class="box mt-100 " >
+                    @if ($succes = Session::get('succes'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $succes }}</strong>
+                    </div>
+                    @endif
                     <div class="box-header">
                     <a href="{{route('pelanggan.create')}}" class="box-title btn-success btn-sm">Add data</a>
                     </div>
@@ -36,12 +41,16 @@
                             <td>{{$no++}}</td>
                             <td>{{$data->nama}}</td>
                             <td>{{$data->alamat}}</td>
-                            <td>{{$data->barcode}}</td>
+                            <td>{!! DNS2D::getBarcodeHTML("$data->barcode", "QRCODE",3,3)!!}</td>
                             <td>{{$data->petugas->nama}}</td>
                                 <td>
-                                        <a href="" class="btn-primary btn-sm">show</a>
-                                        <a href="" class="btn-primary btn-sm">edit</a>
-                                        <button type="button" class="btn-primary btn-sm">delete</button>
+                                    <form action="{{route('pelanggan.destroy',$data->id_pelanggan)}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <a href="{{route('pelanggan.show',$data->id_pelanggan)}}" class="btn-primary btn-sm">show</a>
+                                        <a href="{{route('pelanggan.edit',$data->id_pelanggan)}}" class="btn-primary btn-sm">edit</a>
+                                        <button type="submit" class="btn-primary btn-sm">delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -64,4 +73,22 @@
         </div>
     </div>
 </section>
+@endsection
+@section('asset-button')
+
+    <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script>
+        $(function () {
+          $('#example1').DataTable()
+          $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+          })
+        })
+      </script>
 @endsection
