@@ -39,19 +39,24 @@ class MeteranController extends Controller
 
     public function created(Request $request){
         $this->validate($request,[
-            'jumlah_meteran'=>'required',
+
             'id_pelanggan'=>'required',
+            // 'id_petugas'=>'required',//di buat berdasarkan login app petugas
+            'jumlah_meteran'=>'required',
             'harga'=>'required',
-            'id_petugas'=>'required',//di buat berdasarkan login app petugas
+
 
         ]);
+        $request['id_petugas']= '1';
         $request['date']= date('Y-m-d');
+
         meteran::create($request->all());
         $response=[
             'message'=>'data berhasil ditambahkan',
             'status'=>'200',
         ];
         return response()->json($response,200);
+        // return $request->all();
     }
 
 }

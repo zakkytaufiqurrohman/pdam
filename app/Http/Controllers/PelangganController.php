@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\pelanggan;
 use App\petugas;
 use Illuminate\Http\Request;
+use App\meteran;
+use Carbon\Carbon;
 
 class PelangganController extends Controller
 {
@@ -44,12 +46,25 @@ class PelangganController extends Controller
             'id_petugas'=>'int|required',
             'alamat'=>'required',
         ]);
+        $data=pelanggan::create([
+            'id_petugas'=>$request->input('id_petugas'),
+            'nama'=>$request->input('nama'),
+            'alamat'=>$request->input('alamat'),
+            'barcode'=>'1',
+        ]);
 
-        $request['barcode']='1';
-        $x=pelanggan::create($request->all());
-        $pelanggan=pelanggan::orderBy('id_pelanggan','DESC')->first();
-        $x->barcode="http://localhost:8000/seach/".$pelanggan->id_pelanggan;
-        $x->save();
+        $datas=pelanggan::orderBy('id_pelanggan','DESC')->first();
+        $data->barcode="http://localhost:8000/seach/".$datas->id_pelanggan;
+        $data->save();
+        // insert ke db meteran
+        $meteran=new meteran;
+        $meteran->id_pelanggan=$datas->id_pelanggan;
+        $meteran->id_petugas=$request->input('id_petugas');
+        $meteran->jumlah_meteran=0;
+        $meteran->date=date('Y-m-d');
+        $meteran->harga=0;
+        $meteran->save();
+
         return redirect()->route('pelanggan.index')->with('succes','data berhasil di tambahkan');
     }
 

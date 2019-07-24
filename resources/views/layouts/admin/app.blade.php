@@ -226,12 +226,17 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
+        <a href="{{route('petugas.index')}}">
+            <i class="fa fa-th"></i> <span>petugas</span>
+        </a>
+        </li>
+        <li>
         <a href="{{route('pelanggan.index')}}">
             <i class="fa fa-th"></i> <span>pelanggan</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>
-          </a>
+        </a>
         </li>
         <li class="treeview">
           <a href="#">

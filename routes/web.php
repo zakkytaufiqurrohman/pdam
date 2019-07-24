@@ -24,3 +24,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // route untuk back end admin
 route::resource('/pelanggan','pelangganController');
+route::resource('/petugas','petugasController');
