@@ -17,4 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/action','MeteranController@search')->name('search');
-Route::post('/created','MeteranController@created')->name('save');
+route::post('login','PetugasController@login');
+Route::group(['middleware'=>'auth:api'],function(){
+    Route::post('/created','MeteranController@created')->name('save');
+});

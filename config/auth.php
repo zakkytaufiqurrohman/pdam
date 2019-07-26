@@ -40,10 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'guard_petugas' => [
+            'driver' => 'session',
+            'provider' => 'guard_petugas',
+        ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'guard_petugas',
             'hash' => false,
         ],
     ],
@@ -75,6 +79,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'guard_petugas' => [
+            'driver' => 'eloquent',
+            'model' => App\guard_petugas::class,
+        ],
     ],
 
     /*

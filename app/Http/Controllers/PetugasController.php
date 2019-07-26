@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\petugas;
 class PetugasController extends Controller
@@ -45,6 +45,7 @@ class PetugasController extends Controller
             'password'=>'required|min:6|confirmed',
         ]);
        $request['password']=bcrypt($request->input('password'));
+       $request['api_token']=bcrypt($request->input('username'));
        petugas::create($request->all());
        return redirect()->route('petugas.index')->with('succes','data berhasil di tambahkan');
     }
@@ -88,8 +89,6 @@ class PetugasController extends Controller
             'username'=>'required|unique:petugas,username,'.$id.',id_petugas',
             'password'=>'|min:6|confirmed',
         ]);
-
-
         $petugas=petugas::findOrFail($id);
         $request['password']=$request->get('password') ? bcrypt($request->get('password')) : $petugas->password;
         $petugas->update($request->all());
@@ -108,5 +107,15 @@ class PetugasController extends Controller
         $data=petugas::findOrFail($id);
         $data->delete();
         return redirect()->route('petugas.index')->with('succes','data berhasil di delete');
+    }
+    public function login(){
+
+        if(auth::guard('guard_petugas')->attempt(['username'=>request('username'),'password'=>request('password')])){
+            $data=auth::guard('guard_petugas')->user();
+            return response()->json(['success' => $data], 200);
+        }
+        else{
+            return response()->json(['error'=>'email atu password salah'], 401);
+        }
     }
 }
