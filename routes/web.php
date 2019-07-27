@@ -20,8 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 // route untuk back end admin
 route::resource('/pelanggan','pelangganController');
 route::resource('/petugas','petugasController');
+Route::get('/laporan','LaporanController@index')->name('laporan.index');
+Route::post('/coba','LaporanController@coba')->name('laporan.coba');
