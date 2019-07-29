@@ -10,6 +10,7 @@ class guard_petugas extends Authenticatable
      *
      * @var array
      */
+    protected $primaryKey='id_petugas';
     protected $fillable = [
         'username', 'password','token',
     ];
