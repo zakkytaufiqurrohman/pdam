@@ -113,6 +113,7 @@ class PetugasController extends Controller
         if(auth::guard('guard_petugas')->attempt(['username'=>request('username'),'password'=>request('password')])){
             $data=auth::guard('guard_petugas')->user();
             return response()->json(['success' => $data], 200);
+
         }
         else{
             return response()->json(['error'=>'email atu password salah'], 401);

@@ -20,4 +20,5 @@ Route::post('/action','MeteranController@search')->name('search');
 route::post('login','PetugasController@login');
 Route::group(['middleware'=>'auth:api'],function(){
     Route::post('/created','MeteranController@created')->name('save');
+    Route::post('/gantiAction','GantiPasswordController@Api');
 });

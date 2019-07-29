@@ -4,6 +4,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
 
+
+  {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+<script src="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/css/buttons.bootstrap.min.css"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script> --}}
 @endsection
 @section('body')
 <section class="content-wrapper">
@@ -88,12 +98,7 @@
 </section>
 @endsection
 @section('asset-button')
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-    <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+
     <script>
             $(function () {
                 $('#example1').DataTable( {
@@ -133,6 +138,7 @@
                 data:{ id_pelanggan: pelanggan },
                 success:function(data){
                     $('tbody').html(data);
+                    // console.log(data);
                 }
 
             })
@@ -161,21 +167,5 @@
 
             })
         })
-        // ajax laravel untuk method post
-        // $(".tahun").change(function(){
-        //     var x= $('.tahun').val();
-        //     $.ajax({
-        //         type:"POST",
-        //         url:'{{ route('laporan.index')}}',
-        //         data:{ id: x },
-        //         success:function(data){
-        //             console.log(data);
-        //         }
-
-        //     })
-        // })
-
-
-
     </script>
 @endsection

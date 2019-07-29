@@ -25,3 +25,5 @@ route::resource('/pelanggan','pelangganController');
 route::resource('/petugas','petugasController');
 Route::get('/laporan','LaporanController@index')->name('laporan.index');
 Route::post('/coba','LaporanController@coba')->name('laporan.coba');
+Route::get('/ganti_password','GantiPasswordController@index')->name('ganti.index');
+Route::post('/gantiAction','GantiPasswordController@action')->name('ganti.action');
