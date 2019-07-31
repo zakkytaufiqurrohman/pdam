@@ -19,6 +19,7 @@ return array(
     'App\\Http\\Controllers\\LaporanController' => $baseDir . '/app/Http/Controllers/LaporanController.php',
     'App\\Http\\Controllers\\MeteranController' => $baseDir . '/app/Http/Controllers/MeteranController.php',
     'App\\Http\\Controllers\\PelangganController' => $baseDir . '/app/Http/Controllers/PelangganController.php',
+    'App\\Http\\Controllers\\PetugasAuth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/PetugasAuth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\PetugasController' => $baseDir . '/app/Http/Controllers/PetugasController.php',
     'App\\Http\\Controllers\\coba' => $baseDir . '/app/Http/Controllers/coba.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

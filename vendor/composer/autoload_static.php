@@ -403,6 +403,7 @@ class ComposerStaticInit4221ca2b6ef2c18698137c393c3b592b
         'App\\Http\\Controllers\\LaporanController' => __DIR__ . '/../..' . '/app/Http/Controllers/LaporanController.php',
         'App\\Http\\Controllers\\MeteranController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeteranController.php',
         'App\\Http\\Controllers\\PelangganController' => __DIR__ . '/../..' . '/app/Http/Controllers/PelangganController.php',
+        'App\\Http\\Controllers\\PetugasAuth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/PetugasAuth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\PetugasController' => __DIR__ . '/../..' . '/app/Http/Controllers/PetugasController.php',
         'App\\Http\\Controllers\\coba' => __DIR__ . '/../..' . '/app/Http/Controllers/coba.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

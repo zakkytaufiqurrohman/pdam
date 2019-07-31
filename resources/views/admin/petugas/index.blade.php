@@ -27,6 +27,7 @@
                         <th>No</th>
                         <th>nama</th>
                         <th>usename</th>
+                        <th>email</th>
                         <th>action</th>
                         </tr>
                         </thead>
@@ -39,6 +40,7 @@
                                 <td>{{$no++}}</td>
                                 <td>{{$data->nama}}</td>
                                 <td>{{$data->username}}</td>
+                                <td>{{$data->email}}</td>
                                 <td>
                                         <form action="{{route('petugas.destroy',$data->id_petugas)}}" method="post">
                                             @csrf

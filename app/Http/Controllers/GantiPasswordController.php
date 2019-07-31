@@ -52,6 +52,7 @@ class GantiPasswordController extends Controller
        }
        $user=auth::guard('api')->user();
        $user->password=bcrypt($request->get('new_password'));
+       $user->api_token=bcrypt($user->email);
        $user->save();
        return Response()->json(['success'=>'password berhasil di rubah']);
 

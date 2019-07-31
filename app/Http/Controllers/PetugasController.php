@@ -42,6 +42,7 @@ class PetugasController extends Controller
         $this->validate($request,[
             'nama'=>'required|string',
             'username'=>'required|unique:petugas',
+            'email'=>'required|unique:petugas',
             'password'=>'required|min:6|confirmed',
         ]);
        $request['password']=bcrypt($request->input('password'));
@@ -87,6 +88,7 @@ class PetugasController extends Controller
         $this->validate($request,[
             'nama'=>'required|string',
             'username'=>'required|unique:petugas,username,'.$id.',id_petugas',
+            'email'=>'required|unique:petugas,email,'.$id.',id_petugas',
             'password'=>'|min:6|confirmed',
         ]);
         $petugas=petugas::findOrFail($id);

@@ -17,7 +17,9 @@ class CreatePetugasTable extends Migration
             $table->bigIncrements('id_petugas');
             $table->string('nama');
             $table->string('username');
+            $table->string('email')->unique();
             $table->string('password');
+            $table->string('remember_token');
 	        $table->string('api_token');
             $table->timestamps();
         });
