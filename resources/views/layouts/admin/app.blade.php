@@ -144,14 +144,14 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+            <span class="hidden-xs">{{auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                 <p>
-                  Alexander Pierce - Web Developer
+                    {{auth::user()->name}}
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -209,7 +209,7 @@
           <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{auth::user()->name}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -225,13 +225,17 @@
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
+
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        @if (auth()->user()->can('akses_petugas'))
         <li>
         <a href="{{route('petugas.index')}}">
             <i class="fa fa-th"></i> <span>petugas</span>
         </a>
         </li>
+        @endif
+        @if (auth()->user()->can('akses_pelanggan'))
         <li>
         <a href="{{route('pelanggan.index')}}">
             <i class="fa fa-th"></i> <span>pelanggan</span>
@@ -240,6 +244,8 @@
             </span>
         </a>
         </li>
+        @endif
+        @if (auth()->user()->can('akses_laporan'))
         <li>
             <a href="{{route('laporan.index')}}">
                 <i class="fa fa-th"></i> <span>laporan</span>
@@ -247,7 +253,32 @@
                   <small class="label pull-right bg-green">new</small>
                 </span>
             </a>
+        </li>
+        @endif
+        <li>
+            <a href="#">
+                <i class="fa fa-th"></i> <span>pengeluaran('under production ')</span>
+                <span class="pull-right-container">
+                  {{-- <small class="label pull-right bg-green">new</small> --}}
+                </span>
+            </a>
+        </li>
+       @role('admin')
+            <li class="treeview">
+                <a href="#">
+                <i class="fa fa-table"></i> <span>Management role</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                <li><a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i> role</a></li>
+                <li><a href="{{route('users.index')}}"><i class="fa fa-circle-o"></i>users</a></li>
+                <li><a href="{{route('users.roles_permission')}}"><i class="fa fa-circle-o"></i>role permission</a></li>
+                </ul>
             </li>
+            <li>
+        @endrole
       </ul>
     </section>
     <!-- /.sidebar -->

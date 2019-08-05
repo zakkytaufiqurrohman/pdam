@@ -10,7 +10,7 @@ class GantiPasswordController extends Controller
 {
     //
     public function index(){
-        return view('ganti_password');
+        return view('Ganti_password');
     }
     public function action(Request $request){
        $this->validate($request,[

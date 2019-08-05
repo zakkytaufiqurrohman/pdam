@@ -25,10 +25,12 @@ class ForgotPasswordController extends Controller
     {
         return Response()->json(['succes'=>'email sudah dikirim'], 200);
     }
-
+    // buat broker di config/aut
     public function broker()
     {
          return Password::broker('petugas');
     }
+    //kemudian tambahkan tabel reset password
+    // buat notification: php artisan make:notification SellerResetPasswordNotification dan tambahkan metode di model sendPasswordResetNotification
 }
 
