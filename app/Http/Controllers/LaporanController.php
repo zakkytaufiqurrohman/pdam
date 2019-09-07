@@ -5,6 +5,8 @@ use App\meteran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Carbon;
+use pelanggan;
 class LaporanController extends Controller
 {
     public function index(){
@@ -15,10 +17,8 @@ class LaporanController extends Controller
          return view('admin.laporan.index',compact('meteran','pelanggan','petugas'));
     }
     public function coba(Request $request){
-
         if($request->ajax()){
             $output="";
-
             // $meteran="DB::table('meterans')->where('id_petugas','!=',0)";
             //  $meteran=meteran::all();
              $meteran=meteran::where('id_petugas','!=',0);
@@ -80,7 +80,37 @@ class LaporanController extends Controller
                 '</tr>';
             }
             return Response($output);
+            // return $meteran2;
         }
 
+    }
+
+    public function cari(Request $request){
+
+        if($request->ajax()){
+            $output="";
+            if($request->mulai != '' && $request->akhir != '')
+            {
+                $datas = meteran::whereBetween('date', array($request->get('mulai'), $request->get('akhir')))
+                 ->get();
+            }
+            else
+            {
+                $datas = DB::table('meterans')->orderBy('date', 'desc')->get();
+            }
+            $no=1;
+            foreach($datas as $data){
+                $output .='<tr>'.
+                '<td>'.$no++.'</td>'.
+                '<td>'.$data->pelanggan->nama.'</td>'.
+                '<td>'.$data->petugas->nama.'</td>'.
+                '<td>'.$data->jumlah_meteran.'</td>'.
+                '<td>'.$data->date.'</td>'.
+                '<td>'.$data->harga.'</td>'.
+                '</tr>';
+            }
+            return Response($output);
+
+        }
     }
 }

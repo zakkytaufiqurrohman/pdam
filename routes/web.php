@@ -47,4 +47,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/ganti_password','GantiPasswordController@index')->name('ganti.index');
     Route::post('/gantiAction','GantiPasswordController@action')->name('ganti.action');
     Route::post('/coba','LaporanController@coba')->name('laporan.coba');
+    Route::post('/cari','LaporanController@cari')->name('laporan.cari');
 });
