@@ -4,7 +4,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
 
+<style>
+.ajax-loader {
+  visibility: hidden;
+  background-color: rgba(255,255,255,0.7);
+  position: absolute;
+  z-index: +100 !important;
+  width: 100%;
+  height:100%;
+}
 
+.ajax-loader img {
+  position: relative;
+  top:50%;
+  left:50%;
+}
+
+</style>
 
 
   {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
@@ -36,61 +52,79 @@
                     <div class="box-body">
                         <div class="container">
                             <div class="row">
-                                    <div class="col-md-4 ">
-                                            <form class="input-daterange" id="data" >
-
-                                                <div class="input-group input-daterange">
-                                                <div class="form-group">
-                                                    <label>masukkan awal tgl/bulan</label>
-                                                    <input type="text" name="mulai" id="mulai" readonly class="form-control @error('mulai') is-invalid @enderror" name="mulai" required  ">
-                                                    @error('mulai')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                            </span>
-                                                    @enderror
-                                                </div>
-                                                {{-- <div class="input-group-addon">to</div> --}}
-                                                <div class="form-group">
-                                                    <label>sampai tgl</label>
-                                                    <input type="text" name="akhir" id="akhir" readonly class="form-control @error('akhir') is-invalid @enderror" name="akhir" required  autofocus ">
-                                                    @error('akhir')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
+                                <div class="col-md-4 ">
+                                    <form class="input-daterange" id="data" >
+                                        <div class="input-group input-daterange">
+                                            <div class="form-group">
+                                                <p class="btn btn-success">silahkan filter data sesuai keinginan</p>
+                                                <label>masukkan awal tgl/bulan</label>
+                                                <input type="text" name="mulai" id="mulai" readonly class="form-control @error('mulai') is-invalid @enderror" name="mulai" required  ">
+                                                @error('mulai')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
                                                         </span>
-                                                    @enderror
-                                                </div>
-
+                                                @enderror
+                                            </div>
+                                                {{-- <div class="input-group-addon">to</div> --}}
+                                            <div class="form-group">
+                                                <label>sampai tgl</label>
+                                                <input type="text" name="akhir" id="akhir" readonly class="form-control @error('akhir') is-invalid @enderror" name="akhir" required  autofocus ">
+                                                @error('akhir')
+                                                    <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                                         {{-- <input type="text" id="mulai" readonly class="form-control" />
                                                         <div class="input-group-addon">to</div>
                                                         <input type="text" id="akhir" readonly class="form-control" /> --}}
-                                                <button class="btn btn-primary cari" style="margin:20px 0 20px 0">cari</button>
-                                                <br>
-                                                </form>
-                                                </div>
-                                              </div>
-                            </div>
+                                            <button class="btn btn-primary cari" style="margin:20px 0 20px 0">cari</button>
+                                            <br>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="ajax-loader">
+                                        <img width=100px src="{{ asset('/img/1.gif') }}" class="img-responsive" />
+                                </div>
+                                <div class="col-md-4">
+                                    <div style="margin-left:50px">
+                                        <h2>Jumlah Saldo</h2>
 
-                                <select name="pelanggan" class="pelanggan">
+                                        @php
+                                            $saldo=$costs-$pengeluaran;
+                                            echo number_format($saldo,2,',','.');
+                                        @endphp
+                                        {{-- <h4 style="color:indigo">{{ $costs}}</h4> --}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <select name="pelanggan" class="pelanggan">
                                         <option value="">pilih pelanggan</option>
                                         @foreach ($pelanggan as $item)
                                             <option value="{{$item->id_pelanggan}}">{{$item->pelanggan->nama}}</option>
                                         @endforeach
                                     </select>
                                     <select name="petugas" class="petugas">
-                                            <option value="">pilih petugas</option>
-                                            @foreach ($petugas as $item)
-                                                <option value="{{$item->id_petugas}}">{{$item->petugas->nama}}</option>
-                                            @endforeach
+                                        <option value="">pilih petugas</option>
+                                        @foreach ($petugas as $item)
+                                            <option value="{{$item->id_petugas}}">{{$item->petugas->nama}}</option>
+                                        @endforeach
                                     </select>
                                     <select name="tahun" class="tahun">
-                                                <option value="">pilih tahun</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2018">2018</option>
-                                                {{-- @foreach ($petugas as $item)
-                                                    <option value="{{$item->id_petugas}}">{{$item->petugas->nama}}</option>
-                                                @endforeach --}}
+                                        <option value="">pilih tahun</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                <a href="{{route('laporan.cetakPdf')}}" class="btn btn-danger">Cetak PDF</a>
+                                </div>
+                            </div>
                         </div>
+
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -103,7 +137,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @php
+                            {{-- @php
                                 $no=1;
                             @endphp
                             @foreach ($meteran as $data)
@@ -115,7 +149,7 @@
                                 <td>{{$data->date}}</td>
                                 <td>{{$data->harga}}</td>
                             </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                         <tfoot>
                         <tr>
@@ -137,28 +171,8 @@
 </section>
 @endsection
 @section('asset-button')
-
-    {{-- <script>
-            // $(function () {
-            //     $('#example1').DataTable( {
-            //     dom: 'Bfrtip',
-            //     buttons: [
-            //         'print'
-            //     ]
-            // } );
-            $('#example2').DataTable({
-                'paging'      : true,
-                'lengthChange': false,
-                'searching'   : false,
-                'ordering'    : true,
-                'info'        : true,
-                'autoWidth'   : false,
-                buttons: [
-                 'print'
-        ]
-            })
-            // })
-    </script> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
     <script>
         $(document).ready(function () {
             $.ajaxSetup({
@@ -167,8 +181,6 @@
                 }
             });
         })
-
-
         $(".pelanggan").change(function(){
             var pelanggan= $('.pelanggan').val();
             var petugas= $('.petugas').val();
@@ -178,9 +190,7 @@
                 data:{ id_pelanggan: pelanggan },
                 success:function(data){
                     $('tbody').html(data);
-                    // console.log(data);
                 }
-
             })
         })
         $(".petugas").change(function(){
@@ -192,7 +202,6 @@
                 success:function(data){
                     $('tbody').html(data);
                 }
-
             })
         })
         $(".tahun").change(function(){
@@ -203,45 +212,36 @@
                 data:{ tahun: tahun },
                 success:function(data){
                     $('tbody').html(data);
-                    // console.log(data);
                 }
             })
         })
     </script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
-<script>
-
-        $('.input-daterange').datepicker({
+    <script>
+         $('.input-daterange').datepicker({
         todayBtn: 'linked',
         format: 'yyyy-mm-dd',
         autoclose: true
         });
-</script>
-   <script>
-
+    </script>
+    <script>
         $(".cari").click(function(){
             event.preventDefault();
             var mulai=$('#mulai').val();
             var akhir=$('#akhir').val();
             $.ajax({
                 type:"post",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
                 url:'{{route('laporan.cari')}}',
                 data:{mulai:mulai,akhir:akhir},
-
                 success:function(data){
                     $('tbody').html(data);
-
                 },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(xhr.status);
-                    console.log(xhr.responseText);
-                    console.log(thrownError);
-                }
+                complete: function(){
+    $('.ajax-loader').css("visibility", "hidden");
+  }
             })
         })
-
-    </script>
+        </script>
 @endsection

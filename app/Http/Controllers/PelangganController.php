@@ -106,6 +106,10 @@ class PelangganController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+
+        ]);
+
         $data=pelanggan::findOrFail($id);
         $this->validate($request,[
             'nama'=>'required',

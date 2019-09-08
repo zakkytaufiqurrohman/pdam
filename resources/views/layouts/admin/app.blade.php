@@ -259,8 +259,8 @@
         </li>
         @endif
         <li>
-            <a href="#">
-                <i class="fa fa-th"></i> <span>pengeluaran('under production ')</span>
+            <a href="{{ route('pengeluaran.index')}}">
+                <i class="fa fa-th"></i> <span>pengeluaran</span>
                 <span class="pull-right-container">
                   {{-- <small class="label pull-right bg-green">new</small> --}}
                 </span>

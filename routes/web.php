@@ -43,9 +43,19 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => ['permission:akses_laporan']], function() {
         Route::get('/laporan','LaporanController@index')->name('laporan.index');
     });
+    // pengeluran
+
+    Route::resource('/pengeluaran','PengeluaranController');
+
+
+
+
+
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/ganti_password','GantiPasswordController@index')->name('ganti.index');
     Route::post('/gantiAction','GantiPasswordController@action')->name('ganti.action');
     Route::post('/coba','LaporanController@coba')->name('laporan.coba');
     Route::post('/cari','LaporanController@cari')->name('laporan.cari');
+    // Route::post('/pdf','LaporanController@cari')->name('laporan.pdf');
+    Route::get('/cetakPdf/','LaporanController@cetakPdf')->name('laporan.cetakPdf');
 });

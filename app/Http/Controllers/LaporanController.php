@@ -5,8 +5,9 @@ use App\meteran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use Carbon;
-use pelanggan;
+use Illuminate\Support\Facades\Session;
+use PDF;
+use App\pengeluaran;
 class LaporanController extends Controller
 {
     public function index(){
@@ -14,7 +15,9 @@ class LaporanController extends Controller
          $pelanggan=meteran::groupBy('id_pelanggan')->get();
          $petugas=meteran::groupBy('id_petugas')->get();
          $meteran=meteran::all();
-         return view('admin.laporan.index',compact('meteran','pelanggan','petugas'));
+         $costs = meteran::with('Sort')->sum('harga');
+         $pengeluaran=pengeluaran::with('sort')->sum('jumlah');
+         return view('admin.laporan.index',compact('meteran','pelanggan','petugas','costs','pengeluaran'));
     }
     public function coba(Request $request){
         if($request->ajax()){
@@ -69,6 +72,7 @@ class LaporanController extends Controller
             // return $meteran;
             $no=1;
             $meteran2=$meteran->get();
+            Session::put('key',$meteran2);
             foreach($meteran2 as $data){
                 $output .='<tr>'.
                 '<td>'.$no++.'</td>'.
@@ -84,9 +88,7 @@ class LaporanController extends Controller
         }
 
     }
-
     public function cari(Request $request){
-
         if($request->ajax()){
             $output="";
             if($request->mulai != '' && $request->akhir != '')
@@ -98,6 +100,8 @@ class LaporanController extends Controller
             {
                 $datas = DB::table('meterans')->orderBy('date', 'desc')->get();
             }
+            // $this->pdf2($datas);
+            Session::put('key',$datas);
             $no=1;
             foreach($datas as $data){
                 $output .='<tr>'.
@@ -110,7 +114,33 @@ class LaporanController extends Controller
                 '</tr>';
             }
             return Response($output);
-
         }
     }
+    public function pdf2($data){
+       return $data;
+    }
+    public function cetakPdf(){
+        $time = $_SERVER['REQUEST_TIME'];
+        $timeout_duration = 5;
+        if (isset($_SESSION['LAST_ACTIVITY']) &&
+        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+            session_unset();
+            session_destroy();
+            session_start();
+        }
+        $_SESSION['LAST_ACTIVITY'] = $time;
+
+        $data=Session::get('key');
+        if(!isset($data)){
+            $data=meteran::all();
+            $pdf = PDF::loadview('admin.laporan.cetakPdf',['meteran'=>$data]);
+        }
+        $data=Session::get('key');
+        $pdf = PDF::loadview('admin.laporan.cetakPdf',['meteran'=>$data]);
+        Session_start();
+        Session_destroy();
+        return $pdf->download('laporan-meteran-pdf');
+
+    }
+
 }
